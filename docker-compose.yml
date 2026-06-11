@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+
+  mysql:
+    image: mysql
+    container_name: mysql-container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: studentdb
+    ports:
+      - "5000:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  app:
+    image: docker-demo:3.0
+    container_name: student-app
+    depends_on:
+      - mysql
+    ports:
+      - "9090:9090"
+    environment:
+      SERVER_PORT: 9090
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/studentdb
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    volumes:
+      - names-volume:/app
+
+volumes:
+  names-volume:
+  mysql-data:

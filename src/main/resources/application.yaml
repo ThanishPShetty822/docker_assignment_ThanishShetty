@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: DockerDemoapp
+  datasource:
+    url: jdbc:mysql://mysql:3306/studentdb
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      show-sql: true
+
+server:
+  port: ${SERVER_PORT:9090}
